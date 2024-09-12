@@ -1,19 +1,35 @@
-//
-//  ViewController.swift
-//  Xylophone
-//
-//  Created by youssef ahmed on 12/09/2024.
-//
-
 import UIKit
+import AVFoundation
+
+var player: AVAudioPlayer?
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
-
-
+    
+    @IBAction func playPressed(_ sender: UIButton) {
+        
+        guard let path = Bundle.main.path(forResource: sender.currentTitle, ofType:"wav") else {
+            return }
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
 }
 
